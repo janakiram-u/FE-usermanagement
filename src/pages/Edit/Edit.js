@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Card, Button, TextField, FormControlLabel, RadioGroup, Radio, FormControl, FormLabel, Select, MenuItem, Grid, CircularProgress, Box } from '@mui/material';
+import { Card, Button, TextField, FormControlLabel, RadioGroup, Radio, FormControl, FormLabel, Select, MenuItem, CircularProgress, Box, Stack, InputLabel } from '@mui/material';
 import { singleUsergetfunc, editfunc } from '../../services/Apis';
 import { useNavigate, useParams } from 'react-router-dom';
 import { updateData } from '../../components/context/ContextProvider';
 import { ToastContainer, toast } from "react-toastify";
 import { BASE_URL } from '../../services/helper';
 import 'react-toastify/dist/ReactToastify.css';
-import "./edit.css";
+import { DriveFileRenameOutline, Category, LocationOn, MailOutline, Phone, CloudUpload } from '@mui/icons-material'; // Importing icons
+import Spiner from '../../components/Spiner/Spiner';
 
 const Edit = () => {
   const [inputdata, setInputData] = useState({
@@ -113,65 +114,136 @@ const Edit = () => {
       setShowSpin(false)
     }, 1200)
   }, [image]);
-
   return (
     <>
       {showspin ? (
-        <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
-          <CircularProgress />
-        </Box>
+        <Spiner />
       ) : (
-        <div className="container">
-          <h2 className='text-center mt-1'>Update Your Details</h2>
-          <Card className='shadow mt-3 p-3'>
-            <Box display="flex" justifyContent="center" alignItems="center" marginBottom="16px">
-              <img src={image ? preview : `${BASE_URL}/uploads/${imgdata}`} alt="img" style={{ maxWidth: '150px', maxHeight: '150px' }} />
-            </Box>
-            <form onSubmit={submitUserData}>
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={6}>
-                  <TextField fullWidth variant="outlined" label="First name" name='fname' value={inputdata.fname} onChange={setInputValue} placeholder='Enter FirstName' />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField fullWidth variant="outlined" label="Last Name" name='lname' value={inputdata.lname} onChange={setInputValue} placeholder='Enter LastName' />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField fullWidth variant="outlined" label="Email address" type="email" name='email' value={inputdata.email} onChange={setInputValue} placeholder='Enter Email' />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField fullWidth variant="outlined" label="Mobile" name='mobile' value={inputdata.mobile} onChange={setInputValue} placeholder='Enter Mobile' />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <FormControl component="fieldset">
-                    <FormLabel component="legend">Select Your Gender</FormLabel>
-                    <RadioGroup row name="gender" value={inputdata.gender} onChange={setInputValue}>
-                      <FormControlLabel value="Male" control={<Radio />} label="Male" />
-                      <FormControlLabel value="Female" control={<Radio />} label="Female" />
-                    </RadioGroup>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <FormControl fullWidth>
-                    <FormLabel>Select Your Status</FormLabel>
-                    <Select value={status} onChange={setStatusValue}>
-                      {options.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
-                      ))}
+        <div className="containss">
+          <h3 className="text-center">
+            Register your Restaurant here...
+          </h3>
+          <div>
+            <Card className="shadow mt-3 p-3 color-card">
+              <div className="text-center">
+                {preview && (
+                  <img className="img-fluid" src={preview} alt="Uploaded Image" style={{ maxWidth: '100%', maxHeight: '250px' }} />
+                )}
+                {!preview && (
+                  <img className="img-fluid" src="/man.png" alt="add Image" style={{ maxWidth: '100%', maxHeight: '250px' }} />
+                )}
+              </div>
+              <form onSubmit={submitUserData}>
+                <Stack spacing={2}>
+                  <Stack spacing={1}>
+                    {/* Wrap each field and its label in Stack with appropriate spacing */}
+                    <InputLabel className="input-container">First Name</InputLabel>
+                    <TextField
+                      fullWidth
+                      type="text"
+                      name="fname"
+                      value={inputdata.fname}
+                      onChange={setInputValue}
+                      placeholder="Enter Name"
+                      InputProps={{ startAdornment: <DriveFileRenameOutline /> }} // Icon for Name field
+                    />
+                  </Stack>
+                  <Stack spacing={1}>
+                    <InputLabel>Lastname</InputLabel>
+                    <TextField
+                      fullWidth
+                      type="text"
+                      name="lname"
+                      value={inputdata.lname}
+                      onChange={setInputValue}
+                      placeholder="Enter Category"
+                      InputProps={{ startAdornment: <Category /> }} // Icon for Category field
+                    />
+                  </Stack>
+                 
+                  <Stack spacing={1}>
+                    <InputLabel>Email address</InputLabel>
+                    <TextField
+                      fullWidth
+                      type="email"
+                      name="email"
+                      value={inputdata.email}
+                      onChange={setInputValue}
+                      placeholder="Enter Email"
+                      InputProps={{ startAdornment: <MailOutline /> }} // Icon for Email field
+                    />
+                  </Stack>
+                  <Stack spacing={1}>
+                    <InputLabel>Mobile</InputLabel>
+                    <TextField
+                      fullWidth
+                      type="text"
+                      name="mobile"
+                      value={inputdata.mobile}
+                      onChange={setInputValue}
+                      placeholder="Enter Mobile"
+                      InputProps={{ startAdornment: <Phone /> }} // Icon for Mobile field
+                    />
+                  </Stack>
+                  <Stack spacing={1}>
+                    <InputLabel>Select gender</InputLabel>
+                    <Select
+                      fullWidth
+                      value={inputdata.gender}
+                      label="gender"
+                      name="gender"
+                      onChange={setInputValue}
+                    >
+                      <MenuItem value="Male">Male</MenuItem>
+                      <MenuItem value="Female">Female</MenuItem>
+                      
                     </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField fullWidth variant="outlined" label="Select Your Profile" type="file" name='user_profile' onChange={setProfile} placeholder='Select Your Profile' />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField fullWidth variant="outlined" label="Enter Your Location" name='location' value={inputdata.location} onChange={setInputValue} placeholder='Enter Your Location' />
-                </Grid>
-                <Grid item xs={12}>
-                  <Button variant="contained" color="primary" type="submit">Submit</Button>
-                </Grid>
-              </Grid>
-            </form>
-          </Card>
+                  </Stack>
+                  <Stack spacing={1}>
+                    <InputLabel>Select Status</InputLabel>
+                    {/* Wrap the Select component and its label in Stack with appropriate spacing */}
+                    <Select
+                      fullWidth
+                      value={status}
+                      label="Status"
+                      name="status"
+                      onChange={setStatusValue}
+                    >
+                      <MenuItem value="Active">Active</MenuItem>
+                      <MenuItem value="InActive">InActive</MenuItem>
+                    </Select>
+                  </Stack>
+                  <label htmlFor="profile-upload" className="btn btn-primary">
+                    <CloudUpload />
+                    &nbsp; Add Image
+                    <input
+                      id="profile-upload"
+                      type="file"
+                      accept="image/*"
+                      name="user_profile"
+                      onChange={setProfile}
+                      style={{ display: 'none' }}
+                    />
+                  </label>
+                  <Stack spacing={1}>
+                    <InputLabel>Location</InputLabel>
+                    <TextField
+                      fullWidth
+                      type="text"
+                      name="location"
+                      value={inputdata.location}
+                      onChange={setInputValue}
+                      placeholder="Enter Your Location"
+                      InputProps={{ startAdornment: <LocationOn /> }} // Icon for Location field
+                    />
+                  </Stack>
+                  <Button variant="contained" type="submit">
+                    Submit
+                  </Button>
+                </Stack>
+              </form>
+            </Card>
+          </div>
           <ToastContainer position="top-center" />
         </div>
       )}

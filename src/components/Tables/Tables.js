@@ -28,7 +28,7 @@ const Tables = ({ userdata, deleteUser, userGet, handlePrevious, handleNext, pag
     <div className="container">
       <Box>
         <div className="col mt-0">
-          <Card className='shadow p-0' style={{ backgroundColor: "#f0f0f0" }}>
+          <Card className='shadow p-0' style={{ backgroundColor: "aliceblue" }}>
             <TableContainer>
               <Table className='align-items-center' responsive="sm">
                 <TableHead className='thead-dark'>
