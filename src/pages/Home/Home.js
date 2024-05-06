@@ -223,7 +223,7 @@ const deleteUser = async (id) => {
               </Popover>
             </div>
           </div>
-          {/* export,gender,status */}
+        
           <div style={{ marginTop: '20px' }}>
             {
               showspin ? <Spiner /> : <Tables

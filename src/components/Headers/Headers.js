@@ -13,7 +13,7 @@ const Headers = () => {
         <Button component={Link} to="/" color="inherit">Home</Button>
         <Button component={Link} to="/about" color="inherit">About</Button>
         <Button component={Link} to="/contact" color="inherit">Contact</Button>
-        {/* Add more Button components for additional pages */}
+        
       </Toolbar>
     </AppBar>
   );

@@ -136,7 +136,7 @@ const Edit = () => {
               <form onSubmit={submitUserData}>
                 <Stack spacing={2}>
                   <Stack spacing={1}>
-                    {/* Wrap each field and its label in Stack with appropriate spacing */}
+                   
                     <InputLabel className="input-container">First Name</InputLabel>
                     <TextField
                       fullWidth
@@ -157,7 +157,7 @@ const Edit = () => {
                       value={inputdata.lname}
                       onChange={setInputValue}
                       placeholder="Enter Category"
-                      InputProps={{ startAdornment: <Category /> }} // Icon for Category field
+                      InputProps={{ startAdornment: <Category /> }} 
                     />
                   </Stack>
                  
@@ -170,7 +170,7 @@ const Edit = () => {
                       value={inputdata.email}
                       onChange={setInputValue}
                       placeholder="Enter Email"
-                      InputProps={{ startAdornment: <MailOutline /> }} // Icon for Email field
+                      InputProps={{ startAdornment: <MailOutline /> }} 
                     />
                   </Stack>
                   <Stack spacing={1}>
@@ -182,7 +182,7 @@ const Edit = () => {
                       value={inputdata.mobile}
                       onChange={setInputValue}
                       placeholder="Enter Mobile"
-                      InputProps={{ startAdornment: <Phone /> }} // Icon for Mobile field
+                      InputProps={{ startAdornment: <Phone /> }} 
                     />
                   </Stack>
                   <Stack spacing={1}>
@@ -201,7 +201,6 @@ const Edit = () => {
                   </Stack>
                   <Stack spacing={1}>
                     <InputLabel>Select Status</InputLabel>
-                    {/* Wrap the Select component and its label in Stack with appropriate spacing */}
                     <Select
                       fullWidth
                       value={status}
@@ -234,7 +233,7 @@ const Edit = () => {
                       value={inputdata.location}
                       onChange={setInputValue}
                       placeholder="Enter Your Location"
-                      InputProps={{ startAdornment: <LocationOn /> }} // Icon for Location field
+                      InputProps={{ startAdornment: <LocationOn /> }} 
                     />
                   </Stack>
                   <Button variant="contained" type="submit">
