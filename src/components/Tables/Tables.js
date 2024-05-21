@@ -13,11 +13,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 const Tables = ({ userdata, deleteUser, userGet, handlePrevious, handleNext, page, pageCount, setPage }) => {
 
   const handleChange = async (id, status) => {
-    const filters = {}; // Initialize filters object if it's undefined
+    const filters = {}; 
     const response = await statuschangefunc(id, status);
 
     if (response.status === 200) {
-      userGet(filters); // Pass filters to userGet
+      userGet(filters); 
       toast.success("Status Updated")
     } else {
       toast.error("error ")
@@ -33,13 +33,13 @@ const Tables = ({ userdata, deleteUser, userGet, handlePrevious, handleNext, pag
               <Table className='align-items-center' responsive="sm">
                 <TableHead className='thead-dark'>
                   <TableRow className='table-dark'>
-                    <TableCell><strong>ID</strong></TableCell>
-                    <TableCell><strong>Profile</strong></TableCell>
-                    <TableCell><strong>Name</strong></TableCell>
-                    <TableCell><strong>Email</strong></TableCell>
-                    <TableCell><strong>Gender</strong></TableCell>
-                    <TableCell><strong>Status</strong></TableCell>
-                    <TableCell><strong>Actions</strong></TableCell>
+                    <TableCell className='table-cell'><strong>ID</strong></TableCell>
+                    <TableCell className='table-cell'><strong>Profile</strong></TableCell>
+                    <TableCell className='table-cell'><strong>Name</strong></TableCell>
+                    <TableCell className='table-cell'><strong>Email</strong></TableCell>
+                    <TableCell className='table-cell'><strong>Gender</strong></TableCell>
+                    <TableCell className='table-cell'><strong>Status</strong></TableCell>
+                    <TableCell className='table-cell'><strong>Actions</strong></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

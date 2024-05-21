@@ -7,13 +7,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import FilterIcon from '@mui/icons-material/FilterAlt';
 import SearchIcon from '@mui/icons-material/Search';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import { MenuItem, Select } from '@mui/material';
+import { InputBase, MenuItem, Select } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import Tables from '../../components/Tables/Tables';
 import Spiner from "../../components/Spiner/Spiner";
 import { useNavigate } from "react-router-dom";
 import { addData, dltdata, updateData } from '../../components/context/ContextProvider';
-import { usergetfunc, deletfunc, exporttocsvfunc } from "../../services/Apis";
+import { usergetfunc, deletfunc } from "../../services/Apis";
 import { toast } from 'react-toastify';
 import "./home.css";
 
@@ -92,17 +92,7 @@ const deleteUser = async (id) => {
 }
 
 
-  // export user
-  const exportuser = async () => {
-    const response = await exporttocsvfunc();
-    if (response.status === 200) {
-      window.open(response.data.downloadUrl, "blank");
-    } else {
-      toast.error("error !");
-    }
-  }
-
-  // pagination
+ 
   // handle prev btn
   const handlePrevious = () => {
     setPage((prevPage) => Math.max(prevPage - 1, 1));
@@ -136,17 +126,18 @@ const deleteUser = async (id) => {
 
       <div className="container">
         <div className="main_div">
-          {/* search add btn */}
           <div className="search_add mt-4 d-flex justify-content-between">
-            <div className="search col-lg-4 d-flex align-items-center justify-content-end">
-              <input
-                type="search"
-                placeholder="Search"
-                className="me-2 sea"
-                aria-label="Search"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
+            <div className="search col-lg-4 d-flex align-items-center ">
+            <InputBase
+    type="search"
+    placeholder="Search"
+    className="me-2 sea"
+    aria-label="Search"
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+    onFocus={(e) => e.target.classList.add('no-outline')}
+    onBlur={(e) => e.target.classList.remove('no-outline')}
+  />
               <IconButton onClick={() => console.log('search')}><SearchIcon /></IconButton>
             </div>
             <div className="add_btn">

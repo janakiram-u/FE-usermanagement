@@ -1,6 +1,10 @@
 .export_btn,.sea {
     
-    border-radius: 10px;
+    border-radius: 8px;
+    background-color:whitesmoke;
+    width:70%;
+    height: 40px;
+    padding: 5px;
 }
 
 .dropdown_btn {
@@ -8,7 +12,7 @@
     border: none;
     color: blue;
     font-size: 20px;
-}
+}s
 
 .dropdown-toggle::after {
     display: none;
@@ -17,3 +21,10 @@
 .dropdown_btn:hover {
     color: blue !important;
 }
+.search_add{
+padding-left: 15px;
+padding-right: 15px;
+}
+/* .container {
+    background: linear-gradient(to top right, red, blue);
+  } */
